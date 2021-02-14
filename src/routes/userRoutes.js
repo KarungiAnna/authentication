@@ -1,93 +1,29 @@
 import { Router } from 'express';
-//const router = require('express').Router();
-import { auth, createUser, loginUser, serializeUser, checkRole } from '../controllers/userControllers';
-//import { auth } from '../middleware/auth';
+import { homePage, signupPage, createUser, loginPage, loginUser, studentProfile, adminDashboard,
+fetchAllUsers } from '../controllers/userControllers';
+import auth from '../middleware/auth.js'
+
 
 const router = Router();
+//Home page route
+  router.get("/homepage", homePage);
 
+// Users Registration/ signup Route
+  router.get("/signup", signupPage);
+  router.post("/signup", createUser);
 
-//router.post('/users', createUser);
-//router.get("/users", fetchAllUsers);
-//router.post('/users/login', loginUser);
-
-// Users Registeration Route
-/*router.post("/register-user", async (req, res) => {
-     await createUser(req.body, "user", res);
-  });*/
-  router.post("/register-user", createUser);
-  
-  // Admin Registration Route
- /* router.post("/register-admin", async (req, res) => {
-    await createUser(req.body, "admin", res);
-  });*/
-  router.post("/register-admin", createUser);
-  // Super Admin Registration Route
-  router.post("/register-super-admin", async (req, res) => {
-    await createUser(req.body, "superadmin", res);
-  });
-  
   // Users Login Route
-  /*router.post("/login-user", async (req, res) => {
-    await loginUser(req.body, "user", res);
-  });*/
-   router.post("/login-user", loginUser);
-  
-  // Admin Login Route
- /* router.post("/login-admin", async (req, res) => {
-    await loginUser(req.body, "admin", res);
-  });*/
-  router.post("/login-admin", loginUser);
-  
-  // Super Admin Login Route
-  router.post("/login-super-admin", async (req, res) => {
-    await loginUser(req.body, "superadmin", res);
-  });
+  router.get("/login", loginPage);
+  router.post("/login", loginUser);
   
   // Profile Route
- /* router.get("/profile", auth, async (req, res) => {
-    return res.json(serializeUser(req.user));
-  });
+  router.get("/profile", auth, studentProfile);
+
+  // Dashboard route
+  router.get("/dashboard", auth, adminDashboard);
+
+  // Fetch all users route
+  router.get("/users", auth, fetchAllUsers);
   
-  // Users Protected Route
-  router.get(
-    "/user-protectd",
-    auth,
-    checkRole(["user"]),
-    async (req, res) => {
-      return res.json("Hello User");
-    }
-  );
-  
-  // Admin Protected Route
-  router.get(
-    "/admin-protectd",
-    auth,
-    checkRole(["admin"]),
-    async (req, res) => {
-      return res.json("Hello Admin");
-    }
-  );
-  
-  // Super Admin Protected Route
-  router.get(
-    "/super-admin-protectd",
-    auth,
-    checkRole(["superadmin"]),
-    async (req, res) => {
-      return res.json("Hello Super Admin");
-    }
-  );
-  
-  // Super Admin Protected Route
-  router.get(
-    "/super-admin-and-admin-protectd",
-    auth,
-    checkRole(["superadmin", "admin"]),
-    async (req, res) => {
-      return res.json("Super admin and Admin");
-    }
-  );*/
-  
-  //module.exports = router;
 export default router;
 

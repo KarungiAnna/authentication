@@ -1,7 +1,8 @@
 import User from '../models/User'
 import bcrypt from "bcryptjs";
-import { auth } from '../middleware/auth';
-//register a new user
+require("dotenv").config();
+
+//register  user
 const createUser = async(req, res) => {
     const userData = req.body;
     const user = new User(userData);
@@ -9,18 +10,13 @@ const createUser = async(req, res) => {
     const token = await user.generateAuthToken();
     res.status(201).send({message: 'Your account has been created successfully', user, token});
 };
-//login a new user
+//login a user
 const loginUser = async(req, res) => {
    const { email, password } = req.body;
    const user = await User.findOne({ email });
    if(!user){
        return res.status(400).send({ error: "Invalid login credentials."});
    }
-   //check the role
-   /*if (user.role !== role) {
-    return res.status(403).json({
-    message: "Please make sure you are logging in from the right portal."});
-  }*/
   //check password
    const isPasswordMatch = await bcrypt.compare(password, user.password);
    if(!isPasswordMatch){
@@ -30,27 +26,41 @@ const loginUser = async(req, res) => {
    res.status(201).send({ message: "Logged in successfully", user, token });
 };
 
-//Check Role Middleware
- 
-const checkRole = roles => (req, res, next) =>
-  !roles.includes(req.user.role)
-    ? res.status(401).send("Unauthorized")
-    : next();
+//Get Homepage
+const homePage = async (req, res) => {
+  res.status(200).send('Home page');
+}
+//Get signup
+const signupPage = async (req, res) => {
+  res.status(200).send('Signup page');
+}
+//Get login
+const loginPage = async (req, res) => {
+  res.status(200).send('Login page');
+}
 
-/*const validateEmail = async email => {
-  let user = await User.findOne({ email });
-  return user ? false : true;
-};*/
+// Get Student profile
+const studentProfile = async (req, res) => {
+  const user = await req.user;
+  res.status(200).send({message: "Student Profile", user});
+}
+//Get Dashboard
+const adminDashboard = async (req, res) => {
+  const user = await req.user;
+ if(user.role !== "admin" && user.role !== "superadmin") {
+    return res.status(401).send('Unauthorized')
+  }
+  return res.status(200).send({message: "Dashboard", user});
+}
+//Fetch all users
+const fetchAllUsers = async (req, res) => {
+  const users = await User.find({});
+  const user = await req.user;
+  if(user.role !== "admin" && user.role !== "superadmin") {
+     return res.status(401).send('Unauthorized')
+   }
+   return res.status(200).send(users);  
+}
+//logout 
 
-const serializeUser = user => {
-  return {
-    name: user.name,
-    email: user.email,
-    _id: user._id,
-    updatedAt: user.updatedAt,
-    createdAt: user.createdAt
-  };
-};
-//logout a logged user
-
-export {auth, createUser, loginUser, serializeUser, checkRole}
+export { homePage, signupPage, createUser, loginPage, loginUser, studentProfile, adminDashboard, fetchAllUsers}

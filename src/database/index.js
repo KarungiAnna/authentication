@@ -7,8 +7,8 @@ mongoose.connect(process.env.DATABASE_URL, {
   useUnifiedTopology: true
 });
 
-//Get the default connection
+//default connection
 var db = mongoose.connection;
 
-//Bind connection to error event (to get notification of connection errors)
+//connection to error event
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
