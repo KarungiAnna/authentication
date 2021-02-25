@@ -1,0 +1,146 @@
+
+body{
+	
+	background-image: linear-gradient(rgba(0, 0, 0, 0.8),rgba(179, 172, 116, 0.8)),url("code queen.jpg");
+	
+	position: relative;
+	backdrop-filter: 20px;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 100vh;
+	/* align-items: center;
+	display: flex;
+	justify-content: center; */
+	--color-primary:orange;
+	--color-primary-dark:#08007f;
+	--color-secondary:lightgray;
+	--color-error:#cc3333;
+	--color-success:#4bb544;
+	--border-radius:30px;
+}
+.logo 
+{
+display: flex;
+justify-self: start;
+width: 200px;
+height: 150px;
+margin-bottom: 10px;
+border-radius: 20px;
+}
+.big-one 
+{
+	background-color:orange;
+	margin-top: 80px;
+	margin-bottom: 50px;
+	border-radius: 20px;
+	margin-left: 50px;
+	margin-right: 50px;
+	width: 700px;
+	height: 600px;
+	margin: auto;
+	padding-right: 30px;
+	padding-top: 6rem;
+	
+}
+.container 
+{
+	width: 400px;
+	max-width: 400px;
+	margin: auto;
+	
+	padding: 2rem;
+	box-shadow: 0 0 40px rgba(0,0,0,0.2);
+	background: white;
+	border-radius: 10px ;
+}
+.container,
+.form-input,
+.form-button 
+{
+	font: 500rem ;
+	/* font-family:'Abril Fatface', cursive; */
+}
+.form-title{
+	margin-bottom: 2rem;
+	text-align: center;
+}
+.form > *:first-child{
+	margin-top: 0;
+
+}
+.form > *:last-child{
+	margin-bottom: 0;
+}
+.form-message {
+	text-align: center;
+	margin-bottom: 1rem;
+}
+.form-message-success{
+	color: var(--color-success);
+}
+.form-message-error{
+	color: var(--color-error);
+}
+.form-input-group{
+	margin-bottom: 1rem;
+
+}
+.form-input{
+	display: block;
+	width: 100%;
+	padding: 0.75rem;
+	box-sizing: border-box;
+	border-radius: var(--border-radius);
+	border: 1px solid #dddddd;
+	background:white;
+	transition: background 0.2s, border-color 0.2s;
+	outline: none;
+}
+.form-input:focus{
+	border-color: #009579;
+	background: #ffffff;
+
+}
+.form-input-error{
+	color: var(--color-error);
+	border: var(--color-error);
+}
+.form-input-error-message{
+	color: var(--color-error);
+	margin-top: 0.5rem;
+	font-size: 0.85rem;
+}
+.form-button{
+	width: 100%;
+	padding: 1rem 2rem;
+	font-weight: bold;
+	color:white;
+	outline: none;
+	cursor: pointer;
+	background: gray;
+	font-size: 1.2rem;
+	border: none;
+	border-radius: 30px;
+}
+.form-button:hover{
+	background: var(--color-secondary);
+	outline:none;
+}
+.form-button:active{
+	transform:scale(0.8);
+}
+.form-text {
+	text-align: center;
+	margin-top: 2rem;
+
+}
+#form-link{
+	color: var(--color-primary-dark);
+	text-decoration: none;
+	cursor: pointer;
+
+}
+#form-link:hover{
+	text-decoration: underline;
+}
