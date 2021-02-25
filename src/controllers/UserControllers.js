@@ -35,9 +35,13 @@ const signupPage = async (req, res) => {
   res.status(200).send('Signup page');
 }
 //Get login
-const loginPage = async (req, res) => {
+/*const loginPage = async (req, res) => {
   res.status(200).send('Login page');
-}
+}*/
+//Get login from browser
+/*const loginPage = async (req, res) => {
+  res.status(200).render('login');
+}*/
 
 // Get Student profile
 const studentProfile = async (req, res) => {
@@ -61,6 +65,11 @@ const fetchAllUsers = async (req, res) => {
    }
    return res.status(200).send(users);  
 }
+//Update user
+//Delete user
+
 //logout 
 
-export { homePage, signupPage, createUser, loginPage, loginUser, studentProfile, adminDashboard, fetchAllUsers}
+export { homePage, signupPage, createUser, 
+  //loginPage,
+   loginUser, studentProfile, adminDashboard, fetchAllUsers}

@@ -15,5 +15,8 @@ app.use(userRoutes);  //import and use routes
 app.get("/", (req, res) => {
     res.status(200).send({ message: "API is live!" });
   });
+  app.set('views', __dirname + '/views'); 
+  app.set('view engine', 'html');
+ app.get('/login', (req, res) => res.render('login'));
   
   export default app;
